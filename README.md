@@ -3,6 +3,8 @@ BMU FileParser -- Antminer single &amp; merged BMU parser
 
 Проект включает оригинальный код полного разбора single &amp; merged BMU файлов. 
 
+- [Single & Merged BMU file format](/BMU_format.md)
+
 Сборка проекта CMake:
 ```sh
 $ cmake -B build 
@@ -20,10 +22,10 @@ item_count  : 3
 item_size   : 172
 data_offset : 16384 (0x4000)
 crc32       : 0x8467DBCC OK
-#   Model                Hardware             Chip         Name                                                   Offset       Size
-0   Antminer S19 XP      AMLCtrl_BHB56XXX                  update.bmu                                              16384   15102976
-1   Antminer S19 XP      CVCtrl_BHB56XXX                   update.bmu                                           15119360   12696969
-2   Antminer S19 XP      zynq7007_BHB56XXX                 update.bmu                                           27816329   20312841
+#   Model                Hardware             Name            Offset       Size
+0   Antminer S19 XP      AMLCtrl_BHB56XXX     update.bmu       16384   15102976
+1   Antminer S19 XP      CVCtrl_BHB56XXX      update.bmu    15119360   12696969
+2   Antminer S19 XP      zynq7007_BHB56XXX    update.bmu    27816329   20312841
 ```
 Для разбора шифрованного `AMLCtrl` образа используются ключи шифрования `key1` и `key2`. Открытый ключ подписи RSA  `bitmain.pub` берется из прошивки `/etc/bitmain.pub`. Подпись разделов выполняется вторичным ключом `miner.pem`, ключ `miner.pem` подписан первичным ключом `bitmain.pub`.
 ```sh
@@ -100,9 +102,6 @@ BMU fw version: '20250207'
 file[0] type:[0] size:[8024422]
 file[1] type:[1] size:[2933]
 file[2] type:[2] size:[4666542]
-OpenSSL error: error:0200008A:rsa routines::invalid padding
-Check miner.pem Failed!
-Check pem payload failed! ret:[13]
 File 'BOOT.bin' Signature OK!
 File 'devicetree.dtb' Signature OK!
 File 'uImage' Signature OK!
